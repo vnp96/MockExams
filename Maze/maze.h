@@ -17,3 +17,6 @@ bool find_marker(char, char**, int, int, int&, int&);
 bool valid_solution(const char*, char**, int, int);
 
 char* find_path(char**, int, int, char, char);
+
+
+

@@ -51,7 +51,7 @@ int main() {
   if (!valid_solution("ESSSSSSEEEEEEE", maze, height, width))
     cout << "NOT ";
   cout << "a solution to the maze" << endl << endl;
-/*
+
   cout << "====================== Question 3 ======================" << endl << endl;
 
   cout << "A path through the maze from '>' to 'X' is: " << endl;
@@ -70,7 +70,7 @@ int main() {
   cout << find_path(maze, height, width, '>', 'U') << endl << endl;
 
   deallocate_2D_array(maze, height);
-  
+
   cout << "=================== Bonus Question =====================" << endl << endl;
 
   // find the path from the entrance to the middle of the Hatfield House maze
@@ -100,9 +100,8 @@ int main() {
   cout << "The path is shown below: " << endl;
   print_maze(maze, height, width);
   cout << endl;
-*/
-  deallocate_2D_array(maze, height);
 
+  deallocate_2D_array(maze, height);
   cout << "======================= The End ========================" << endl << endl;
 
   return 0;
