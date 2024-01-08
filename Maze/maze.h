@@ -10,3 +10,10 @@ char **load_maze(const char *filename, int &height, int &width);
 
 /* pre-supplied function to print a maze */
 void print_maze(char **m, int height, int width);
+
+
+bool find_marker(char, char**, int, int, int&, int&);
+
+bool valid_solution(const char*, char**, int, int);
+
+char* find_path(char**, int, int, char, char);

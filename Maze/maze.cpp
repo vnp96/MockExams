@@ -86,10 +86,119 @@ void print_maze(char **m, int height, int width) {
   cout << endl;
 
   for (int r=0; r<height; r++) {
-    cout << setw(4) << r << " ";    
-    for (int c=0; c<width; c++) 
+    cout << setw(4) << r << " "; 
+    for (int c=0; c<width; c++)
       cout << m[r][c];
     cout << endl;
   }
 }
+
+bool find_marker(char ch, char **maze, int height, int width,
+					int& row, int& column){
+	for(int r = 0 ; r < height; r++){
+		for(int c = 0; c < width; c++){
+			if(maze[r][c] == ch){
+				row = r;
+				column = c;
+				return true;
+			}
+		}
+
+	}
+
+	row = -1;
+	column = -1;
+	return false;
+}
+
+bool valid_path(const char* path){
+	const char* valid_char = "NEWS";
+	for(const char* ch = path; *ch != '\0'; ch++){
+		bool cur_valid = false;
+		for(const char* v = valid_char; *v != '\0'; v++)
+			if(*v == *ch)
+				cur_valid = true;
+		if(!cur_valid)
+			return false;
+	}
+	return true;
+}
+
+bool move(char ch, int height, int width, int& row, int& column){
+	if(ch == 'N'){
+		if(row-1 < 0)
+			return false;
+		row -= 1;
+		return true;
+	}
+	if(ch == 'E'){
+		if(column+1 >= width)
+			return false;
+		column += 1;
+		return true;
+	}
+	if(ch == 'W'){
+		if(column-1 < 0)
+			return false;
+		column -= 1;
+		return true;
+	}
+	if(ch == 'S'){
+		if(row+1 >= height)
+			return false;
+		row += 1;
+		return true;
+	}
+
+	return false;
+}
+
+bool valid_solution(const char* path, char **maze, int height, int width){
+	if(!valid_path(path))
+		return false;
+
+	int start_row, start_column;
+	if(!find_marker('>', maze, height, width, start_row, start_column) )
+		return false;
+
+	int exit_row, exit_column;
+	if(!find_marker('X', maze, height, width, exit_row, exit_column) )
+		return false;
+
+	int row = start_row, column = start_column;
+	for(const char* ch = path; *ch != '\0'; ch++){
+		if( !move(*ch, height, width, row, column) )
+			return false;
+		if( !( maze[row][column] == ' ' || maze[row][column] == 'X' || maze[row][column] == '>') )
+			return false;
+	}
+
+	if( row != exit_row || column != exit_column)
+		return false;
+
+	return true;
+}
+
+char* find_path(char** maze, int height, int width, char start, char end){
+	char* path[512];
+
+	int start_row, start_column;
+	if(!find_marker('>', maze, height, width, start_row, start_column) )
+		return false;
+
+	int exit_row, exit_column;
+	if(!find_marker('X', maze, height, width, exit_row, exit_column) )
+		return false;
+
+	if( !get_path(maze, height, width, start_row, start_column, path, 0) )
+		strcpy(path, "no solution");
+	return path;
+}
+
+bool get_path(char** maze, int height, int width, int row, int col, char* path, int path_ind){
+	
+}
+
+
+
 
