@@ -18,6 +18,6 @@ bool display_chain(const char *chain[MAX_STEPS], ostream&);
 
 bool valid_chain(const char *chain[MAX_STEPS]);
 
-bool find_chain(const char*, const char*, const char* answer[100], int, int depth = 0);
+bool find_chain(const char*, const char*, const char* answer[100], int, int depth = 0, int prev_change = -1);
 
 #endif

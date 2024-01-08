@@ -91,18 +91,39 @@ bool valid_chain(const char* chain[MAX_STEPS]){
 }
 
 bool find_chain(const char* source, const char* target, const char* answer[100],
-				int steps, int depth){
+				int steps, int depth, int prev_change){
 	if( strcmp(source, target) == 0 ){
-		return true;
+        return true;
 	}
 
-	if(depth + 1 >= steps)
+	if(depth > steps)
 		return false;
 
-	char possible_word[20];
+    if(depth == 0){
+        answer[depth] = source;
+        answer[depth + 1] = NULL;
+        depth++;
+    }
+
+    char* possible_word = new char[20];
 	for(int index = 0; source[index] != '\0'; index++){
+        if( index == prev_change )
+            continue;
 		strcpy(possible_word, source);
-		for(int 
+		for(char ch = 'A'; ch <= 'Z'; ch++){
+            possible_word[index] = ch;
+            if( valid_step(source, possible_word) ){
+                answer[depth] = possible_word;
+                answer[depth+1] = NULL;
+                if( !valid_chain(answer) )
+                    continue;
+                if( find_chain(possible_word, target, answer, steps, depth + 1, index) ){
+                    return true;
+                }
+            }
+        }
 	}
 
+    delete[] possible_word;
+    return false;
 }

@@ -91,14 +91,6 @@ int main()
     display_chain(answer, cout);
   cout << endl;
 
-// can you turn a HARD problem into an EASY one in up to 5 steps
-  success = find_chain("YEAR", "HEAR", answer, 5);
-  cout << (success ? "Found" : "Could not find") << " a chain from 'YEAR' to 'HEAR' with up to 5 steps"<< endl;
-
-  if (success)
-    display_chain(answer, cout);
-  cout << endl;
-/*
   // can you evolve APE into MAN in up to 6 steps? 
   success = find_chain("APE", "MAN", answer, 6);
   cout << (success ? "Found" : "Could not find") << " a chain from 'APE' to 'MAN' with up to 6 steps"<< endl;
@@ -127,18 +119,20 @@ int main()
   if (success)
     display_chain(answer, cout);
   cout << endl;
-*/
-  /*
+
   cout << "==================== Bonus Challenge ===================" << endl << endl;
 
   // change this to reflect the number of steps required to solve your clue
-  #define YOUR_STEPS 8
+  #define YOUR_STEPS 7
   // *INSERT CLUE HERE* (e.g. Can you make BREAD from FLOUR in up to 8 steps?)
-  success = find_chain("*YOUR START WORD HERE*", "*YOUR TARGET WORD HERE*", answer, YOUR_STEPS);
-
+  const char* source = "COKE";
+  const char* target = "DEAD";
+  success = find_chain(source, target, answer, YOUR_STEPS);
+  cout << (success ? "Found" : "Could not find") << " a chain from '"<< source << "' to '";
+  cout << target << "' with up to "<< YOUR_STEPS << " steps"<< endl;
   if (success)
     display_chain(answer, cout);
-  */
+
   
   return 0;
 }
